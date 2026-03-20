@@ -1,0 +1,80 @@
+Name: PrintManager API
+Link of GitHub Repository: https://github.com/MarkKevinCanonoy/FastAPI
+
+1. Project Overview Describe the application.
+- The FastAPI Printing Management Backend is a system designed to help the printing seller manage orders and automatically compute the total cost of those orders.
+
+2. Problem Statement What problem does the client face?
+- The client faces a major problem with manually writing down all incoming orders. They have to manually handle the total cost, the customer's name, the payment amount, the exact order details, the quantity, and the change. As orders pile up, this manual process leads to computation errors. There is also a high chance of duplicating orders or completely missing them, which results in lost income and a bad reputation for the business.
+
+3. Objectives List system goals.
+
+- The system solves the manual management problem by providing a backend that handles operations automatically and securely stores order data without losing information. The primary goals are to:
+	- Accept incoming printing orders.
+	- Compute the total cost automatically.
+	- Allow users to view all orders.
+	- Retrieve specific order information.
+
+4. Users Primary users of the system.
+- The primary users of the system are:
+	- Printing business sellers
+	- Customers
+	- Managers
+
+5. Functional Requirements
+- Order Submission
+	- The system must accept new printing orders, requiring the user to input the student's name, document name, total pages, and print type.
+
+- View All Orders
+	- The system must allow users to retrieve and view a complete list of all saved printing orders to monitor the queue.
+
+- Retrieve Specific Order
+	- The system must allow users to search for and view the exact details of a single order using its unique order ID.
+
+6. Non-Functional Requirements
+- Performance
+	- The API must process requests and calculate costs instantly to handle peak hours without slowing down the line.
+
+- Usability
+	- The API must accept and return data in a standard JSON format, making it easy to connect to any future front-end web or mobile application.
+
+- Reliability
+	- The database must safely store order records to ensure zero data loss and prevent the duplication of identical orders.
+
+- Technology Constraint
+	- The backend API must be built using the FastAPI framework.
+
+7. Data Model
+- order_id
+	- A unique identifier automatically generated for each order.
+
+- student_name
+	- The name of the customer/student requesting the print.
+
+- document_name
+	- The file name of the document being printed.
+
+- pages
+	- The total number of pages to be printed.
+
+- print_type
+	- The category of the print job (Accepted values: "black & white", "colored", "photo paper").
+
+- total_cost
+	- The final computed price in PHP (Automatically calculated by pages * print_type rate).
+
+8. Proposed API Endpoints
+- POST /orders
+	- Creates a new printing order. The request body will include the student name, document name, pages, and print type. The backend will calculate the total cost and save the record.
+
+- GET /orders
+	- Retrieves a list of all existing printing orders in the system.
+
+- GET /orders/{order_id}
+	- Retrieves the full details of a specific printing order based on the provided unique ID.
+
+
+Printing Prices
+- black & white: PHP 2.00/page
+- Colored: PHP 5.00/page
+- photo paper: PHP 20.00/page
